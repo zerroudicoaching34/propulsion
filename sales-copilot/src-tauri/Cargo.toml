@@ -1,0 +1,51 @@
+[package]
+name = "ss-sales-copilot"
+version = "0.1.0"
+description = "Smart & Strong — Sales Copilot (local-first)"
+authors = ["Smart & Strong"]
+license = "MIT"
+edition = "2021"
+rust-version = "1.77"
+
+[lib]
+name = "ss_copilot_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# SQLCipher (encrypted SQLite), compiled from source with a vendored OpenSSL.
+rusqlite = { version = "0.32", features = ["bundled-sqlcipher-vendored-openssl"] }
+cpal = "0.15"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+sha2 = "0.10"
+hex = "0.4"
+uuid = { version = "1", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde", "clock"] }
+thiserror = "2"
+rand = "0.8"
+log = "0.4"
+whisper-rs = { version = "0.14", optional = true }
+keyring = { version = "3", features = ["apple-native", "linux-native"] }
+
+[features]
+default = ["whisper"]
+# Local speech-to-text via whisper.cpp. Disable with --no-default-features to build without it.
+whisper = ["dep:whisper-rs"]
+# GPU acceleration on Apple Silicon (enabled by scripts/build-mac.sh and scripts/dev.sh on arm64).
+metal = ["whisper", "whisper-rs/metal"]
+
+[dev-dependencies]
+tempfile = "3"
+hound = "3"
+tokio = { version = "1", features = ["rt", "macros"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+strip = true

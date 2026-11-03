@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Smart &amp; Strong Copilot utilise le micro uniquement pendant un rendez-vous pour lequel le consentement a été enregistré. L'audio est transcrit localement et n'est jamais enregistré sur le disque.</string>
+</dict>
+</plist>
