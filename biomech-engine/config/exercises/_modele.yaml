@@ -1,0 +1,40 @@
+# MODÈLE — copiez ce fichier (ex. squat.yaml) et adaptez-le.
+# Exemple pré-rempli pour un SQUAT filmé DE PROFIL. Non encore validé sur une vidéo réelle :
+# ajustez les formes après un premier `preview`.
+
+meta:
+  title: "SQUAT"
+  subtitle: "BIOMÉCANIQUE & ACTIVATION MUSCULAIRE"
+  signature: "SMART & STRONG | SCIENCE DU MOUVEMENT"
+  disclaimer: "Angles : estimations 2D · Schémas anatomiques illustratifs, pas une mesure EMG"
+
+analysis:
+  sides: [left]                 # de profil : le côté visible
+  metrics: [knee_flexion, hip_flexion, trunk_lean]
+  driver: knee_flexion
+  min_rep_range: 30
+
+overlays:
+  angle_metric: knee_flexion
+  angle_label: "FLEXION DU GENOU"
+  trajectory_points: [hand]     # remplacer par un point de barre si besoin
+  scapula_inset: false
+
+# Repères disponibles aujourd'hui : upper_arm, trunk (voir docs/CONFIG.md).
+# Pour les muscles de la cuisse, ajoutez un repère "thigh" (hanche -> genou) dans render.py.
+muscles: []
+
+style:
+  dim: 0.52
+  desaturate: 0.35
+  vignette: 0.55
+  accent: [201, 162, 75]
+  concentric: [240, 104, 88]
+  eccentric: [90, 170, 255]
+  trajectory: [255, 255, 255]
+  angle: [255, 255, 255]
+
+scenes:
+  - {id: titre, rep: 0, target: 3.0, show: [title, trajectory]}
+  - {id: amplitude, rep: 1, target: 5.0, show: [angle, phase, trajectory], headline: "AMPLITUDE & TRAJECTOIRE"}
+  - {id: synthese, rep: 2, target: 4.0, show: [angle, phase, summary], headline: "SYNTHÈSE", summary: ["…"]}

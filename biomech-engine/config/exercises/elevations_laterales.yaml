@@ -1,0 +1,173 @@
+# ÉLÉVATIONS LATÉRALES (haltères, debout, filmées de face)
+# Paramètres anatomiques, cinématiques et graphiques de l'exercice.
+# Coordonnées des muscles : repères attachés au corps (voir docs/CONFIG.md)
+#   upper_arm : origine épaule, x vers le coude (1 = longueur du bras), y vers l'extérieur (opposé à l'aisselle)
+#   trunk     : origine épaule, x vers le cou (1 = demi-largeur d'épaules), y vers la hanche (1 = longueur du tronc)
+#   Un point peut changer de repère : ["upper_arm", x, y]
+# label_col : colonne de l'étiquette (left/right) ; label_y : hauteur (fraction de l'image)
+
+meta:
+  title: "ÉLÉVATIONS LATÉRALES"
+  subtitle: "BIOMÉCANIQUE & ACTIVATION MUSCULAIRE"
+  signature: "SMART & STRONG | SCIENCE DU MOUVEMENT"
+  disclaimer: "Angles : estimations 2D · Schémas anatomiques illustratifs, pas une mesure EMG"
+
+analysis:
+  sides: [left, right]
+  metrics: [shoulder_abduction, elbow_flexion, trunk_lean]
+  driver: shoulder_abduction          # signal qui définit répétitions et phases
+  min_rep_range: 25
+  lever: {joint: shoulder, load: hand}
+
+overlays:
+  angle_metric: shoulder_abduction
+  angle_label: "ÉLÉVATION DU BRAS"
+  trajectory_points: [hand]           # haltères
+  scapula_inset: true
+  scapulohumeral:                     # rythme théorique (Inman 1944 ; ~2:1 sur l'amplitude)
+    start_deg: 30
+    ratio: 2.0
+
+muscles:
+  - id: deltoide_moyen
+    label: "DELTOÏDE MOYEN"
+    role: "Moteur principal de l'élévation"
+    color: [240, 104, 88]
+    depth: surface
+    anchor: upper_arm
+    hatch_angle: 0                    # fibres le long du bras
+    shape:
+      - ["trunk", 0.16, -0.055]
+      - [-0.08, 0.17]
+      - [0.12, 0.23]
+      - [0.33, 0.17]
+      - [0.50, 0.05]
+      - [0.34, -0.07]
+      - [0.12, -0.10]
+    label_col: right
+    label_y: 0.52
+
+  - id: supra_epineux
+    label: "SUPRA-ÉPINEUX"
+    role: "Abduction + stabilisation de la tête humérale"
+    color: [246, 160, 64]
+    depth: deep                       # profond : tracé stylisé en pointillés
+    anchor: trunk
+    hatch_angle: 0
+    shape:
+      - [0.80, -0.055]
+      - [0.45, -0.075]
+      - [0.10, -0.06]
+      - ["upper_arm", 0.06, 0.06]
+      - ["upper_arm", 0.06, 0.00]
+      - [0.10, -0.025]
+      - [0.45, -0.035]
+      - [0.80, -0.03]
+    label_col: left
+    label_y: 0.58
+
+  - id: trapeze_superieur
+    label: "TRAPÈZE SUPÉRIEUR"
+    role: "Rotation supérieure de la scapula"
+    color: [245, 205, 70]
+    depth: surface
+    anchor: trunk
+    hatch_angle: 20
+    shape:
+      - [0.80, -0.15]
+      - [0.62, -0.115]
+      - [0.40, -0.085]
+      - [0.12, -0.06]
+      - [0.10, -0.025]
+      - [0.42, -0.035]
+      - [0.70, -0.06]
+      - [0.84, -0.09]
+    label_col: left
+    label_y: 0.51
+
+  - id: dentele_anterieur
+    label: "DENTELÉ ANTÉRIEUR"
+    role: "Rotation supérieure + plaquage de la scapula"
+    color: [60, 205, 185]
+    depth: surface
+    anchor: trunk
+    hatch_angle: -30
+    shape:
+      - [-0.14, 0.27]
+      - [0.03, 0.29]
+      - [0.10, 0.38]
+      - [0.08, 0.50]
+      - [-0.04, 0.56]
+      - [-0.16, 0.50]
+      - [-0.19, 0.38]
+    label_col: right
+    label_y: 0.62
+
+  - id: trapeze_inferieur
+    label: "TRAPÈZE INFÉRIEUR"
+    role: "Rotation supérieure (face postérieure)"
+    color: [245, 205, 70]
+    depth: inset_only                 # non visible de face : montré dans l'encart scapulaire
+    anchor: trunk
+    shape: []
+
+style:
+  dim: 0.52                           # assombrissement de la vidéo (0 = noir, 1 = original)
+  desaturate: 0.35
+  vignette: 0.55
+  white: [255, 255, 255]
+  ink: [10, 10, 14]
+  accent: [201, 162, 75]              # or Smart & Strong
+  concentric: [240, 104, 88]
+  eccentric: [90, 170, 255]
+  trajectory: [255, 255, 255]
+  angle: [255, 255, 255]
+
+# Storyboard : chaque scène est jouée sur une répétition réelle (index 0 = première répétition détectée).
+# speed < 1 = ralenti. focus = muscles mis en avant ; show = calques visibles.
+scenes:
+  - id: titre
+    rep: 1
+    target: 3.0
+    show: [title, trajectory]
+    headline: ""
+  - id: trajectoire
+    rep: 2
+    target: 4.0
+    show: [angle, trajectory, phase]
+    headline: "TRAJECTOIRE HUMÉRALE"
+    body: "Le bras s'élève dans le plan frontal jusqu'à ≈ 90°"
+  - id: deltoide
+    rep: 3
+    target: 5.0
+    show: [angle, phase, muscles]
+    focus: [deltoide_moyen, supra_epineux]
+    headline: "DELTOÏDE MOYEN & SUPRA-ÉPINEUX"
+    notes:
+      - {when: "concentric", text: "Concentrique : le deltoïde moyen soulève le bras"}
+      - {when: "top", text: "Le supra-épineux centre la tête humérale"}
+      - {when: "eccentric", text: "Excentrique : les mêmes muscles freinent la descente"}
+  - id: scapula
+    rep: 4
+    target: 5.0
+    show: [angle, phase, muscles, scapula_inset]
+    focus: [trapeze_superieur, dentele_anterieur, trapeze_inferieur]
+    headline: "COORDINATION SCAPULAIRE"
+    body: "Bras et omoplate bougent ensemble : ≈ 2° de bras pour 1° de scapula"
+  - id: levier
+    rep: 5
+    target: 4.0
+    show: [angle, phase, lever, trajectory]
+    headline: "BRAS DE LEVIER & RÉSISTANCE"
+    body: "Plus l'haltère s'éloigne de l'épaule, plus le couple résistant augmente : il est maximal bras à l'horizontale"
+  - id: synthese
+    rep: 6
+    target: 4.0
+    show: [angle, phase, muscles, trajectory, summary]
+    focus: [deltoide_moyen, supra_epineux, trapeze_superieur, dentele_anterieur]
+    headline: "SYNTHÈSE"
+    summary:
+      - "Deltoïde moyen : moteur de l'élévation"
+      - "Supra-épineux : abduction + stabilité"
+      - "Trapèzes + dentelé : rotation de la scapula"
+      - "Couple maximal vers 90° · descente contrôlée"

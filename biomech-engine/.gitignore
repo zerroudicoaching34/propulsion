@@ -1,0 +1,5 @@
+models/*.task
+projects/*/
+!projects/.gitkeep
+__pycache__/
+*.pyc
