@@ -1,0 +1,80 @@
+# Bibliothèque des muscles et des exercices associés.
+# Les exercices sont des exemples de sollicitation : ils ne isolent jamais un muscle à 100 %.
+# clip : clé d'un clip de démonstration déclaré dans exercises (facultatif).
+
+muscles:
+  grand_pectoral:
+    name: "GRAND PECTORAL"
+    function: "Adduction horizontale et rotation médiale de l'épaule"
+    exercise: developpe_couche
+  deltoide_anterieur:
+    name: "DELTOÏDE ANTÉRIEUR"
+    function: "Flexion de l'épaule (antépulsion du bras)"
+    exercise: elevation_frontale
+  deltoide_moyen:
+    name: "DELTOÏDE MOYEN"
+    function: "Élévation du bras — abduction gléno-humérale"
+    exercise: elevation_laterale
+  deltoide_posterieur:
+    name: "DELTOÏDE POSTÉRIEUR"
+    function: "Extension et abduction horizontale de l'épaule"
+    exercise: oiseau_poulie
+  biceps_brachial:
+    name: "BICEPS BRACHIAL"
+    function: "Flexion du coude et supination de l'avant-bras"
+    exercise: curl_incline
+  triceps_brachial:
+    name: "TRICEPS BRACHIAL"
+    function: "Extension du coude"
+    exercise: extension_triceps_poulie
+  grand_droit_abdomen:
+    name: "GRAND DROIT DE L'ABDOMEN"
+    function: "Flexion du tronc et contrôle lombo-pelvien"
+    exercise: crunch
+  oblique_externe:
+    name: "OBLIQUE EXTERNE"
+    function: "Rotation et inclinaison latérale du tronc"
+    exercise: crunch_oblique
+  dentele_anterieur:
+    name: "DENTELÉ ANTÉRIEUR"
+    function: "Protraction et rotation supérieure de la scapula"
+    exercise: push_up_plus
+  grand_dorsal:
+    name: "GRAND DORSAL"
+    function: "Adduction, extension et rotation médiale de l'épaule"
+    exercise: tirage_vertical
+    note: "partie latérale visible uniquement"
+  trapeze_superieur:
+    name: "TRAPÈZE SUPÉRIEUR"
+    function: "Élévation et rotation supérieure de la scapula"
+    exercise: shrug
+
+exercises:
+  developpe_couche:          {name: "DÉVELOPPÉ COUCHÉ", clip: assets/clips/developpe_couche.mp4}
+  elevation_frontale:        {name: "ÉLÉVATION FRONTALE"}
+  elevation_laterale:        {name: "ÉLÉVATION LATÉRALE", clip: assets/clips/elevation_laterale.mp4}
+  oiseau_poulie:             {name: "OISEAU À LA POULIE"}
+  curl_incline:              {name: "CURL INCLINÉ"}
+  extension_triceps_poulie:  {name: "EXTENSION TRICEPS À LA POULIE"}
+  crunch:                    {name: "CRUNCH", clip: assets/clips/crunch.mp4}
+  crunch_oblique:            {name: "CRUNCH OBLIQUE"}
+  push_up_plus:              {name: "PUSH-UP PLUS"}
+  tirage_vertical:           {name: "TIRAGE VERTICAL"}
+  shrug:                     {name: "SHRUG"}
+
+# Déroulé de la vidéo : muscles présentés en détail (avec démonstration), puis présentation rapide.
+video:
+  featured: [deltoide_moyen, grand_pectoral, grand_droit_abdomen]
+  quick: [deltoide_anterieur, biceps_brachial, triceps_brachial, trapeze_superieur, dentele_anterieur, oblique_externe, grand_dorsal]
+gif:
+  sequence: [deltoide_moyen, grand_pectoral, biceps_brachial, triceps_brachial, grand_droit_abdomen, oblique_externe]
+
+style:
+  background: [22, 22, 26]        # noir anthracite
+  bone: [236, 228, 210]           # ivoire
+  highlight: [255, 58, 46]        # rouge lumineux
+  arrow: [64, 224, 208]           # turquoise
+  text: [255, 255, 255]
+  secondary: [190, 190, 198]
+  signature: "SMART & STRONG — ANATOMIE DU MOUVEMENT"
+  disclaimer: "Illustration anatomique générée par IA et ajustée à la photo · approximations possibles"

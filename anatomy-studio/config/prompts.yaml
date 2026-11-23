@@ -1,0 +1,25 @@
+# Prompts utilisés pour générer l'image anatomique à partir d'une photo (Higgsfield, modèle gpt_image_2_6,
+# qualité high, résolution 2k, aspect "auto", la photo en image_references).
+# Astuce miroir : si la photo est un miroir, générer les DEUX versions à partir de la MÊME moitié
+# (celle dont le cadrage est conservé), puis `compose --mirror-muscles`.
+# Évitez les mots « peau retirée », « chair » : le filtre de sécurité les bloque.
+
+squelette: >-
+  Transform the man in this photo into an anatomical skeleton while preserving the photograph: same room,
+  same camera framing, same lighting slightly dimmed, same silhouette, proportions and pose. His bones are
+  shown in place, perfectly aligned with his original body outline: skull with mandible matching the head
+  orientation, cervical vertebrae, clavicles, scapulae, sternum, complete anatomically correct rib cage with
+  costal cartilages, spine, humeri along the upper arms, forearm bones, pelvis and the top of the femurs shown
+  as a translucent X-ray through the trousers. Realistic ivory bone with fine texture and ambient occlusion,
+  anatomy-atlas quality. No text, no labels, no watermark.
+
+muscles: >-
+  Educational fitness anatomy visual. Keep this photo exactly as composed: same room, same framing and camera
+  angle (the man stays at the same place, same size), lighting slightly dimmed, the man's exact silhouette,
+  proportions, pose and trousers. Render his upper body as a clean, stylized 3D anatomy-model figure like in a
+  medical education app or a museum anatomy statue: the superficial muscle groups are shown as smooth matte
+  red-coral shapes with fine fibre lines and white tendons, matching his own physique without exaggeration:
+  pectoralis major, deltoid (front, side, and the visible edge of the rear head), biceps, triceps, rectus
+  abdominis with its segments and central white line, external obliques, serratus anterior, the visible outer
+  edge of latissimus dorsi, upper trapezius, neck muscles. His face and hair stay as in the photo. Clean,
+  non-graphic, textbook style. No text, no labels, no watermark.

@@ -1,0 +1,4 @@
+assets/*
+!assets/.gitkeep
+out/
+__pycache__/
